@@ -32,16 +32,6 @@ our @EXPORT = qw(
 
 our $VERSION = '0.01';
 
-sub parameterize {
-    if (ref $_[0] eq 'HASH') {
-        return @_;
-    } elsif (scalar @_ && scalar @_ % 2 == 0) {
-        return { @_ };
-    } else {
-        return { };
-    }
-}
-
 
 # Preloaded methods go here.
 

@@ -1,15 +1,8 @@
 package Cellucidate::Book;
 
-use Cellucidate;
-use Cellucidate::Request;
+use base Cellucidate::Base;
 
-
-sub show {
-    my $params = parameterize(@_);
-    die "You need to pass in an id parameter!" unless my $id = $params->{'Cellucidate::Bookshelf'}->{'id'};
-    my $client = Cellucidate::Request->new( { host => 'http://localhost:7657' } );
-    return $client->GET("/bookshelves/$id")->processResponse;
-}
+sub route   { '/books'; }
+sub element { 'book';   }
 
 1;
-
