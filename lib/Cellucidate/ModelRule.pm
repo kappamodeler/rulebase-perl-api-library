@@ -1,8 +1,8 @@
-package Cellucidate::Book;
+package Cellucidate::ModelRule;
 
-use Cellucidate::Base;
+use base Cellucidate::Base;
 
-our @ISA = qw(Cellucidate::Base);
-
+sub route   { '/model_rules'; }
+sub element { 'model-rule'; }
 
 1;

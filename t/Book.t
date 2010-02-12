@@ -17,8 +17,8 @@ eval {
     is(Cellucidate::Book->client->responseCode(), '200');
 
     # Show
-    is(Cellucidate::Book->show(1)->{name}, 'My First Book');
-    is(Cellucidate::Book->show(1)->{id}, 1);
+    is(Cellucidate::Book->get(1)->{name}, 'My First Book');
+    is(Cellucidate::Book->get(1)->{id}, 1);
 };
 
 warn "Tests died: $@" if $@;

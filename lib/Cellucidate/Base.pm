@@ -2,6 +2,7 @@ package Cellucidate::Base;
 
 use Data::Dumper;
 use Cellucidate::Request;
+use XML::Simple;
 
 our $CONFIG = {
     host => 'http://api.cellucidate.com'
@@ -15,7 +16,6 @@ sub new {
 
 sub client {
     my $self = shift;
-    $self->{_client} = shift if ($_[0]);
     $self->{_client} = Cellucidate::Request->new($CONFIG) unless $self->{_client};
     $self->{_client};
 }
@@ -27,18 +27,36 @@ sub find {
     $self->client->GET($self->route . "/$query")->processResponseAsArray($self->element);
 }
 
-sub show {
+sub get {
     my $self = shift;
     my $id = shift;
     $self->client->GET($self->route . "/" . $id)->processResponse;
 }
 
-sub route {
-   die "Override in subclass"; 
+sub update {
+    my $self = shift;
+    my $id = shift;
+    my $params = $self->args(@_);
+    $self->client->PUT($self->route . "/" . $id, XMLout($params, RootName => $self->element, NoAttr => 1))->processResponse;
 }
 
+sub create {
+    my $self = shift;
+    my $params = $self->args(@_);
+    $self->client->POST($self->route, XMLout($params, RootName => $self->element, NoAttr => 1))->processResponse;
+}
+
+sub delete {
+    die "Unimplemented!";
+}
+
+sub route {
+    die "Override in subclass"; 
+}
+
+
 sub element {
-   die "Override in subclass"; 
+    die "Override in subclass"; 
 }
 
 sub args {

@@ -4,6 +4,14 @@ use 5.008009;
 use Cellucidate::Request;
 use Cellucidate::Bookshelf;
 use Cellucidate::Book;
+use Cellucidate::Model;
+use Cellucidate::ModelRule;
+use Cellucidate::InitialCondition;
+use Cellucidate::SimulationRun;
+use Cellucidate::Plot;
+use Cellucidate::Series;
+use Cellucidate::Job;
+use Cellucidate::License;
 
 use strict;
 use warnings;
@@ -27,7 +35,6 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 our @EXPORT = qw(
-  parameterize	
 );
 
 our $VERSION = '0.01';
@@ -89,8 +96,7 @@ Cellucidate - Perl extension for blah blah blah
   };
 
   $simulation_run = Cellucidate::SimulationRun->create($params);
-  
-  $simulation_run->{state}; #is it still running?
+  $simulation_run->state; #is it still running?
 
   $plots = $simulation_run->plots();  # Cellucidate::Plot->find( { simulation_run_id => $id } );
 
