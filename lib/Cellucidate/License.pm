@@ -1,8 +1,8 @@
-package Cellucidate::Book;
+package Cellucidate::License;
 
-use Cellucidate::Base;
+use base Cellucidate::Base;
 
-our @ISA = qw(Cellucidate::Base);
-
+sub route { '/licenses'; }
+sub element { 'license'; }
 
 1;

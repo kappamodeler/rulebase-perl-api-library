@@ -1,8 +1,9 @@
 package Cellucidate::Base;
 
-use Data::Dumper;
+use Cellucidate;
 use Cellucidate::Request;
 use XML::Simple;
+use Data::Dumper;
 
 our $CONFIG = {
     host => 'http://api.cellucidate.com'

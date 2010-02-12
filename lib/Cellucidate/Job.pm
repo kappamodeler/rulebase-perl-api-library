@@ -1,8 +1,8 @@
-package Cellucidate::Book;
+package Cellucidate::Job;
 
-use Cellucidate::Base;
+use base Cellucidate::Base;
 
-our @ISA = qw(Cellucidate::Base);
-
+sub route { '/jobs'; }
+sub element { 'job'; }
 
 1;

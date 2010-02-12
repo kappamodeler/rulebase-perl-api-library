@@ -3,7 +3,7 @@
 use t::TestHelper;
 use Data::Dumper;
 
-plan tests => 7;
+plan tests => 9;
 
 use_ok('Cellucidate::Bookshelf');
 
@@ -19,6 +19,10 @@ eval {
     # Show
     is(Cellucidate::Bookshelf->get(1)->{name}, 'My First Bookshelf');
     is(Cellucidate::Bookshelf->get(1)->{id}, 1);
+
+    # Books
+    ok(Cellucidate::Bookshelf->books(1));
+    is(TestHelper->last_request->{path}, '/bookshelves/1/books'); 
 };
 
 warn "Tests died: $@" if $@;
