@@ -9,21 +9,27 @@ sub element { 'model'; }
 sub model_rules {
     my $self = shift;
     my $id = shift;
-    $self->client->GET($self->route . "/$id" . Cellucidate::ModelRule->route)->processResponseAsArray(Cellucidate::ModelRule->element);
+    my $format = shift;
+
+    $self->rest('GET', $self->route . "/$id" . Cellucidate::ModelRule->route, $format)->processResponseAsArray(Cellucidate::ModelRule->element);
 } 
 
 # Cellucidate::Book->initial_conditions($model_id);
 sub initial_conditions {
     my $self = shift;
     my $id = shift;
-    $self->client->GET($self->route . "/$id" . Cellucidate::InitialCondition->route)->processResponseAsArray(Cellucidate::InitialCondition->element);
+    my $format = shift;
+
+    $self->rest('GET', $self->route . "/$id" . Cellucidate::InitialCondition->route, $format)->processResponseAsArray(Cellucidate::InitialCondition->element);
 }
 
 # Cellucidate::Book->simulation_runs($model_id);
-sub simulaton_runs {
+sub simulation_runs {
     my $self = shift;
     my $id = shift;
-    $self->client->GET($self->route . "/$id" . Cellucidate::SimulationRun->route)->processResponseAsArray(Cellucidate::SimultaionRun->element);
+    my $format = shift;
+    
+    $self->rest('GET', $self->route . "/$id" . Cellucidate::SimulationRun->route, $format)->processResponseAsArray(Cellucidate::SimulationRun->element);
 }
 
 1;

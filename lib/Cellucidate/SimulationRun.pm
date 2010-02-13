@@ -9,7 +9,8 @@ sub element { 'simulation-run'; }
 sub plots {
     my $self = shift;
     my $id = shift;
-    $self->client->GET($self->route . "/$id" . Cellucidate::Plot->route)->processResponseAsArray(Cellucidate::Plot->element);
+    my $format = shift;
+    $self->rest('GET', $self->route . "/$id" . Cellucidate::Plot->route, $format)->processResponseAsArray(Cellucidate::Plot->element);
 }
 
 1;

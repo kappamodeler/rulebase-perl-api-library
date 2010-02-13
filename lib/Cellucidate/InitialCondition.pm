@@ -1,8 +1,8 @@
-package Cellucidate::Book;
+package Cellucidate::InitialCondition;
 
-use Cellucidate::Base;
+use base Cellucidate::Base;
 
-our @ISA = qw(Cellucidate::Base);
-
+sub route { '/initial_conditions'; }
+sub element { 'initial-condition'; }
 
 1;

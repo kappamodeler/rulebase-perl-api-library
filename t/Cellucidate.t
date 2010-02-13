@@ -14,7 +14,6 @@ my @modules = qw/
     Cellucidate::Plot
     Cellucidate::Series
     Cellucidate::Job
-    Cellucidate::License
 /;
 
 plan tests => scalar(@modules);

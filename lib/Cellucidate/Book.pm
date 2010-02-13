@@ -10,7 +10,9 @@ sub element { 'book';   }
 sub models {
     my $self = shift;
     my $id = shift;
-    $self->client->GET($self->route . "/$id" . Cellucidate::Model->route)->processResponseAsArray(Cellucidate::Model->element);
+    my $format = shift;
+    
+    $self->rest('GET', $self->route . "/$id" . Cellucidate::Model->route, $format)->processResponseAsArray(Cellucidate::Model->element);
 } 
 
 1;

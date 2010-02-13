@@ -10,7 +10,8 @@ sub element { 'bookshelf';   }
 sub books {
     my $self = shift;
     my $id = shift;
-    $self->client->GET($self->route . "/$id" . Cellucidate::Book->route)->processResponseAsArray(Cellucidate::Book->element);
-}    
+    
+    $self->rest('GET', $self->route . "/$id" . Cellucidate::Book->route)->processResponseAsArray(Cellucidate::Book->element);
+} 
 
 1;
