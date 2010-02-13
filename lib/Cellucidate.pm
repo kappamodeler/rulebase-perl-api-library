@@ -26,17 +26,13 @@ our $AUTH = {
     'api_key' => '123456'
 };
 
-# Preloaded methods go here.
-
-# Autoload methods go after =cut, and are processed by the autosplit program.
 
 1;
-__END__
-# Below is stub documentation for your module. You'd better edit it!
 
+__END__
 =head1 NAME
 
-Cellucidate - Perl extension for blah blah blah
+Cellucidate - Perl library for cellucidate.com
 
 =head1 SYNOPSIS
 
@@ -92,17 +88,71 @@ Cellucidate - Perl extension for blah blah blah
 
 =head1 DESCRIPTION
 
-Stub documentation for Cellucidate, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
+Cellucidate is a tool for computation biologists to run simulations.  It is
+centered around the Kappa language.
 
-Blah blah blah.
+The various objects in Cellucidate are arranged into a book metaphor.  The basic
+hierarchy is:
 
-=head2 EXPORT
+  Bookshelves
+  `-> Books
+      `-> Models
+          `-> Model Rules
+          `-> Initial Conditions
+          `-> Simulation Runs
+              `-> Plots
+                  `-> Series
 
-None by default.
+Additionally, there are a few resources for auxiluary tasks, like importing
+data and running various jobs.
+
+=head2 REST
+
+Cellucidate has a RESTful interface.  So this library is built upon the 
+L<REST::Client> library.  At the core, there are 4 operations over HTTP,
+including: GET, POST, PUT and DELETE.  The encoding is primarily XML, but
+certain resource can be returned in CSV.
+
+=head2 COMMON METHODS / PATTERN
+
+Around each resource, there are convience methods -
+
+    find( { params }, format)
+    get(id, format)
+    update(id, { data }, format)
+    create({ data }, format)
+
+See each subclass for a list of specific methods and examples
+
+=head1 SUBCLASSES
+
+=over 4
+
+=item L<Cellucidate::Base> Base class for each resrouce
+
+=item L<Cellucidate::Bookshelf> 
+
+Represents a Bookshelf in Cellucidate.  This is pretty much the top tier
+of resources.
+
+=item L<Cellucidate::Bookshelf>
+
+Represents a Book in Cellucidate.  This is where Models live.  A book
+can be placed on a Bookshelf and has many Models.
+
+=item L<Cellucidate::Model> 
+
+Represents a biological model in Cellucidate.  The model belongs to a book
+and contains a number of Model Rules and Initial Conditions.  A number of
+simulations can be run from a Model, each having a number of settings.
+
+=item L<Cellucidate::Bookshelf> Represents a Bookshelf in Cellucidate
 
 
+=item L<Cellucidate::Base> Base class for each resrouce
+
+
+=back
 
 =head1 SEE ALSO
 
