@@ -15,9 +15,10 @@ use Data::Dumper;
 our($PID, $PORT, $RECEIVED_METHOD);
 
 sub setup {
+    
     $PORT = 7657;
     $PID  = REST::Client::TestServer->new($PORT)->background();
-    $Cellucidate::Base::CONFIG = { host => "http://localhost:$PORT" };
+    $Cellucidate::CONFIG = { host => "http://localhost:$PORT" };
 }
 
 sub teardown {
@@ -63,7 +64,12 @@ sub handle_request {
     } else {
         $LAST_METHOD = $ENV{'REQUEST_METHOD'};
         $LAST_PATH = $path;
-        $LAST_QUERY = $cgi->param;
+        $LAST_QUERY = $cgi->Vars;
+        if ($LAST_QUERY->{PUTDATA}) {
+            $LAST_QUERY = $LAST_QUERY->{PUTDATA};
+        } elsif ($LAST_QUERY->{'XForms:Model'}) {
+            $LAST_QUERY = $LAST_QUERY->{'XForms:Model'};
+        }
         @LAST_KEYWORDS = $cgi->keywords;
     }
 

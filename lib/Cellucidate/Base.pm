@@ -32,7 +32,7 @@ sub rest {
     my $url = shift;
     my $format = shift || 'xml';
     my $body = shift || undef;
-    my $header = shift;
+    my $header = shift || {};
 
     $self->client->request($method, $url, $body,  { %{$header}, %{$self->headers_for_rest($format)} });
 }

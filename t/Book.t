@@ -8,7 +8,6 @@ plan tests => 7;
 use_ok('Cellucidate::Book');
 
 TestHelper->setup;
-
 eval {
     # Find
     is(Cellucidate::Book->find()->[0]->{name}, 'My First Book');

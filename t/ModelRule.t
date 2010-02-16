@@ -19,12 +19,12 @@ eval {
     # Update
     Cellucidate::ModelRule->update(1, { 'backward-rate' => 5 });
     is(TestHelper->last_request->{method}, 'PUT');
-    like(TestHelper->last_request->{keywords}, qr/<backward-rate>5<\/backward-rate>/);
+    like(TestHelper->last_request->{query}, qr/<backward-rate>5<\/backward-rate>/);
     
     Cellucidate::ModelRule->create({ 'backward-rate' => 6, 'forward-rate' => 1, });
     is(TestHelper->last_request->{method}, 'POST');
-    like(TestHelper->last_request->{keywords}, qr/<forward-rate>1<\/forward-rate>/);
-    like(TestHelper->last_request->{keywords}, qr/<backward-rate>6<\/backward-rate>/);
+    like(TestHelper->last_request->{query}, qr/<forward-rate>1<\/forward-rate>/);
+    like(TestHelper->last_request->{query}, qr/<backward-rate>6<\/backward-rate>/);
 };
 
 warn "Tests died: $@" if $@;

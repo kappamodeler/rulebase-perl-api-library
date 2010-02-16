@@ -3,7 +3,7 @@
 use t::TestHelper;
 
 
-plan tests => 7;
+plan tests => 1;
 
 use_ok('Cellucidate::KappaImportJob');
 

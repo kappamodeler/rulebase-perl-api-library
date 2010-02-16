@@ -1,7 +1,6 @@
 #!/usr/bin/env perl
 
 use t::TestHelper;
-use Data::Dumper;
 
 plan tests => 10;
 
@@ -22,11 +21,11 @@ eval {
     # Update
     Cellucidate::Model->update(121, { name => 'foo' });
     is(TestHelper->last_request->{method}, 'PUT');
-    like(TestHelper->last_request->{keywords}, qr/<name>foo<\/name>/);
+    like(TestHelper->last_request->{query}, qr/<name>foo<\/name>/);
     
     Cellucidate::Model->create({ name => 'foob' });
     is(TestHelper->last_request->{method}, 'POST');
-    like(TestHelper->last_request->{keywords}, qr/<name>foob<\/name>/);
+    like(TestHelper->last_request->{query}, qr/<name>foob<\/name>/);
 };
 
 warn "Tests died: $@" if $@;
