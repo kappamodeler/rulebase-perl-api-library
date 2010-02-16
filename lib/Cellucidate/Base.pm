@@ -13,7 +13,6 @@ our %CONTENT_TYPES = (
   'KA'  => 'application/x-kappa'
 );
 
-
 sub new {
     my $class = shift;
     my $self = bless({}, $class);
@@ -44,7 +43,9 @@ sub headers_for_rest {
     
     my $header = HTTP::Headers->new;
     $header->authorization_basic($Cellucidate::AUTH->{login}, $Cellucidate::AUTH->{api_key});
-    return { 'Authorization'=> $header->{authorization}, 'Content-Type' => $CONTENT_TYPES{'XML'}, 'Accept' => $CONTENT_TYPES{uc($format)} }
+    return { 'Authorization'=> $header->{authorization}, 
+             'Content-Type' => $CONTENT_TYPES{'XML'}, 
+             'Accept' => $CONTENT_TYPES{uc($format)} };
 }
 
 sub content_type_for_format {
@@ -66,7 +67,6 @@ sub get {
     my $self = shift;
     my $id = shift;
     my $format = shift;
-    print 'GET  ', $self->route . "/" . $id . "\n\n";
     $self->rest('GET', $self->route . "/" . $id, $format)->processResponse;
 }
 
@@ -93,7 +93,6 @@ sub delete {
 sub route {
     die "Override in subclass"; 
 }
-
 
 sub element {
     die "Override in subclass"; 
