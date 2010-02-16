@@ -9,7 +9,8 @@ use Data::Dumper;
 
 our %CONTENT_TYPES = (
   'XML' => 'application/xml',
-  'CSV' => 'text/csv'
+  'CSV' => 'text/csv',
+  'KA'  => 'application/x-kappa'
 );
 
 
@@ -21,7 +22,7 @@ sub new {
 
 sub client {
     my $self = shift;
-    $self->{_client} = Cellucidate::Request->new($CONFIG) unless $self->{_client};
+    $self->{_client} = Cellucidate::Request->new($Cellucidate::CONFIG) unless $self->{_client};
     $self->{_client};
 }
 
@@ -42,8 +43,8 @@ sub headers_for_rest {
     my $format = shift || 'xml';
     
     my $header = HTTP::Headers->new;
-    $header->authorization_basic($Cellucidate::AUTH->{email}, $Cellucidate::AUTH->{api_key});
-    return { 'Authorization'=> $header->{authorization}, 'Content-Type' => $CONTENT_TYPES{uc($format)} }
+    $header->authorization_basic($Cellucidate::AUTH->{login}, $Cellucidate::AUTH->{api_key});
+    return { 'Authorization'=> $header->{authorization}, 'Content-Type' => $CONTENT_TYPES{'XML'}, 'Accept' => $CONTENT_TYPES{uc($format)} }
 }
 
 sub content_type_for_format {
@@ -65,6 +66,7 @@ sub get {
     my $self = shift;
     my $id = shift;
     my $format = shift;
+    print 'GET  ', $self->route . "/" . $id . "\n\n";
     $self->rest('GET', $self->route . "/" . $id, $format)->processResponse;
 }
 

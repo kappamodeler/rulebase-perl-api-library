@@ -8,7 +8,14 @@ use Data::Dumper;
 sub processResponse {
     my $self = shift;
     die "No content!" unless (my $content = $self->responseContent);
-    return eval { XMLin($content, ForceArray => 0, KeepRoot => 0, KeyAttr => [], NoAttr => 1, SuppressEmpty => undef) };
+    unless ($self->responseCode eq '200') {
+        die "Invalid Request! Response Code: " . $self->responseCode . "\n" . $content;
+    }
+    if ($self->responseHeader('Content-Type') =~ /.*application\/xml.*/) {
+        return eval { XMLin($content, ForceArray => 0, KeepRoot => 0, KeyAttr => [], NoAttr => 1, SuppressEmpty => undef) };
+    } else {
+        return $content;
+    }
 }
 
 sub processResponseAsArray {
@@ -19,6 +26,19 @@ sub processResponseAsArray {
 
     return [] unless $response_data;
     return ref($response_data) eq 'ARRAY' ? $response_data : [ $response_data ]; 
+}
+
+
+sub _xbuildUseragent {
+    my $self = shift;
+
+    return if $self->getUseragent();
+
+    my $ua = LWP::UserAgent->new;
+    $ua->agent("Cellucidate::Request/$Cellucidate::VERSION");
+    $self->setUseragent($ua);
+
+    return;
 }
 
 1;
