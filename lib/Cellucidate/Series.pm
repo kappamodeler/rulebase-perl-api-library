@@ -1,8 +1,8 @@
-package Cellucidate::Book;
+package Cellucidate::Series;
 
-use Cellucidate::Base;
+use base Cellucidate::Base;
 
-our @ISA = qw(Cellucidate::Base);
-
+sub route { '/series'; }
+sub element { 'series'; }
 
 1;
