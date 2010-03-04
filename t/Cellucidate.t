@@ -7,13 +7,17 @@ my @modules = qw/
     Cellucidate::Request
     Cellucidate::Bookshelf
     Cellucidate::Book
+    Cellucidate::Agent
+    Cellucidate::Rule
     Cellucidate::Model
     Cellucidate::ModelRule
+    Cellucidate::RuleObservable
+    Cellucidate::SolutionObservable
     Cellucidate::InitialCondition
     Cellucidate::SimulationRun
     Cellucidate::Plot
     Cellucidate::Series
-    Cellucidate::Job
+    Cellucidate::KappaImportJob
 /;
 
 plan tests => scalar(@modules);

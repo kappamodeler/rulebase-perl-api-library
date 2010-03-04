@@ -11,7 +11,6 @@ sub processResponse {
     unless ($self->responseCode eq '200') {
         die "Invalid Request! Response Code: " . $self->responseCode . "\n" . $content;
     }
-    print $content;
     if ($self->responseHeader('Content-Type') =~ /.*application\/xml.*/) {
         return eval { XMLin($content, ForceArray => 0, KeepRoot => 0, KeyAttr => [], NoAttr => 1, SuppressEmpty => undef) };
     } else {

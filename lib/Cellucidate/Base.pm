@@ -10,7 +10,8 @@ use Data::Dumper;
 our %CONTENT_TYPES = (
   'XML' => 'application/xml',
   'CSV' => 'text/csv',
-  'KA'  => 'application/x-kappa'
+  'KA'  => 'application/x-kappa',
+  'M'   => 'text/x-matlab'
 );
 
 sub new {
