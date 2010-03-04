@@ -2,7 +2,7 @@ package Cellucidate::SimulationRun;
 
 =pod
 
-=h1 NAME
+=head1 NAME
 
 Cellucidate::SimulationRun
 

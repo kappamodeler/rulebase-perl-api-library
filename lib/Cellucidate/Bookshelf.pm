@@ -2,7 +2,7 @@ package Cellucidate::Bookshelf;
 
 =pod
 
-=h1 NAME
+=head1 NAME
 
 Cellucidate::Bookshelf
 
