@@ -31,6 +31,7 @@ t/fixtures/books.http
 t/fixtures/books/1.http
 t/fixtures/bookshelves.http
 t/fixtures/bookshelves/1.http
+t/fixtures/bookshelves/1/books.http
 t/fixtures/initial_conditions.http
 t/fixtures/kappa_import_jobs.http
 t/fixtures/model_rules.http
