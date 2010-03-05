@@ -1,11 +1,9 @@
-package Cellucidate::Base;
+package Bio::Cellucidate::Base;
 
-use Cellucidate;
-use Cellucidate::Request;
+use Bio::Cellucidate;
+use Bio::Cellucidate::Request;
 use XML::Simple;
 use HTTP::Headers;
-
-use Data::Dumper;
 
 our %CONTENT_TYPES = (
   'XML' => 'application/xml',
@@ -22,7 +20,7 @@ sub new {
 
 sub client {
     my $self = shift;
-    $self->{_client} = Cellucidate::Request->new($Cellucidate::CONFIG) unless $self->{_client};
+    $self->{_client} = Bio::Cellucidate::Request->new($Bio::Cellucidate::CONFIG) unless $self->{_client};
     $self->{_client};
 }
 
@@ -43,7 +41,7 @@ sub headers_for_rest {
     my $format = shift || 'xml';
     
     my $header = HTTP::Headers->new;
-    $header->authorization_basic($Cellucidate::AUTH->{login}, $Cellucidate::AUTH->{api_key});
+    $header->authorization_basic($Bio::Cellucidate::AUTH->{login}, $Bio::Cellucidate::AUTH->{api_key});
     return { 'Authorization'=> $header->{authorization}, 
              'Content-Type' => $CONTENT_TYPES{'XML'}, 
              'Accept' => $CONTENT_TYPES{uc($format)} };

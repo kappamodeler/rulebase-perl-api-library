@@ -1,9 +1,7 @@
-package Cellucidate::Request;
+package Bio::Cellucidate::Request;
 
 use base REST::Client;
-
 use XML::Simple;
-use Data::Dumper;
 
 sub processResponse {
     my $self = shift;
@@ -35,7 +33,7 @@ sub _xbuildUseragent {
     return if $self->getUseragent();
 
     my $ua = LWP::UserAgent->new;
-    $ua->agent("Cellucidate::Request/$Cellucidate::VERSION");
+    $ua->agent("Bio::Cellucidate::Request/$Bio::Cellucidate::VERSION");
     $self->setUseragent($ua);
 
     return;

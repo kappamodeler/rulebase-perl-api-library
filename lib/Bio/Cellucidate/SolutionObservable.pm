@@ -1,6 +1,6 @@
-package Cellucidate::SolutionObservable;
+package Bio::Cellucidate::SolutionObservable;
 
-use base Cellucidate::Base;
+use base Bio::Cellucidate::Base;
 
 sub route   { '/solution_observables'; }
 sub element { 'solution-observable'; }

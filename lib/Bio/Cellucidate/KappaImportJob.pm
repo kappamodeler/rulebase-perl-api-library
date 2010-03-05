@@ -1,12 +1,12 @@
-package Cellucidate::KappaImportJob;
+package Bio::Cellucidate::KappaImportJob;
 
-use base Cellucidate::Base;
+use base Bio::Cellucidate::Base;
 
 sub route   { '/kappa_import_jobs'; }
 sub element { 'kappa-import-job';   }
 
 
-# Cellucidate::KappaImportJob->result($kappa_import_job_id);
+# Bio::Cellucidate::KappaImportJob->result($kappa_import_job_id);
 # This is always going to be a book.
 sub result {
   my $self = shift;

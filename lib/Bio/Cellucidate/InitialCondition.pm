@@ -1,6 +1,6 @@
-package Cellucidate::InitialCondition;
+package Bio::Cellucidate::InitialCondition;
 
-use base Cellucidate::Base;
+use base Bio::Cellucidate::Base;
 
 sub route { '/initial_conditions'; }
 sub element { 'initial-condition'; }

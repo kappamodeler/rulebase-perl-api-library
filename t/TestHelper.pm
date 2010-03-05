@@ -18,7 +18,7 @@ sub setup {
     
     $PORT = 7657;
     $PID  = REST::Client::TestServer->new($PORT)->background();
-    $Cellucidate::CONFIG = { host => "http://localhost:$PORT" };
+    $Bio::Cellucidate::CONFIG = { host => "http://localhost:$PORT" };
 }
 
 sub teardown {

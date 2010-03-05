@@ -2,23 +2,17 @@
 
 use t::TestHelper;
 
-
 plan tests => 1;
 
-use_ok('Cellucidate::KappaImportJob');
+use_ok('Bio::Cellucidate::KappaImportJob');
 
 TestHelper->setup;
-
 eval {
     # Create
-    Cellucidate::KappaImportJob->create( { kappa => <DATA>, name => 'New Book from Kappa' });
-
+    Bio::Cellucidate::KappaImportJob->create( { kappa => <DATA>, name => 'New Book from Kappa' });
 };
-
 warn "Tests died: $@" if $@;
-
 TestHelper->teardown;
-
 
 
 __DATA__

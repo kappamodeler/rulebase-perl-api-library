@@ -1,6 +1,6 @@
-package Cellucidate::RuleObservable;
+package Bio::Cellucidate::RuleObservable;
 
-use base Cellucidate::Base;
+use base Bio::Cellucidate::Base;
 
 sub route   { '/rule_observables'; }
 sub element { 'rule-observable'; }

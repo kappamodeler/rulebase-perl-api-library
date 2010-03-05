@@ -3,8 +3,8 @@ use ExtUtils::MakeMaker;
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
 WriteMakefile(
-    NAME              => 'Cellucidate',
-    VERSION_FROM      => 'lib/Cellucidate.pm', # finds $VERSION
+    NAME              => 'Bio::Cellucidate',
+    VERSION_FROM      => 'lib/Bio/Cellucidate.pm', # finds $VERSION
     PREREQ_PM         => { 
         XML::Simple     => 2.18,
         HTTP::Headers   => 5.827,
@@ -18,6 +18,6 @@ WriteMakefile(
         }
     },
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
-      (ABSTRACT_FROM  => 'lib/Cellucidate.pm', # retrieve abstract from module
+      (ABSTRACT_FROM  => 'lib/Bio/Cellucidate.pm', # retrieve abstract from module
        AUTHOR         => 'Brian Kaney <brian@vermonster.com>') : ()),
 );

@@ -1,15 +1,15 @@
-package Cellucidate::SimulationRun;
+package Bio::Cellucidate::SimulationRun;
 
 =pod
 
 =head1 NAME
 
-Cellucidate::SimulationRun
+Bio::Cellucidate::SimulationRun
 
 =head1 SYNOPSIS
 
     # Set your authentication, see L<http://cellucidate.com/api> for more info.
-    $Cellucidate::AUTH = { login => 'email@server', api_key => '12334567890' };
+    $Bio::Cellucidate::AUTH = { login => 'email@server', api_key => '12334567890' };
 
     $params = { 
         model_id           => 1,           # : valid id of a model
@@ -30,24 +30,25 @@ Cellucidate::SimulationRun
         simulation_method  => 'STOCHASTIC' # : either 'STOCAHASTIC' or 'ODE'
     };
 
-    $simulation_run = Cellucidate::SimulationRun->create($params);
+    $simulation_run = Bio::Cellucidate::SimulationRun->create($params);
 
     $id = $simulation_run->{id};
 
-    while (!Cellucidate::SimulationRun->complete($id)) {
-        print "Simulation Running: " . Cellucidate::SimulationRun->progress($id) . "% complete";
+    while ($simulation_run->{state} ne 'success') {
+        $simulation_run = Bio::Cellucidate::SimulationRun->get($simulation_run->{id});
+        print "Simulation Running: " . Bio::Cellucidate::SimulationRun->progress($id) . "% complete";
         sleep(5);
     }
 
     print "Simulation Complete, CSV data\n";
 
     # This is the CSV data for all series and plots.
-    if (Cellucidate::SimulationRun->get($id)->{state} eq 'succeeded') {
-        print Cellucidate::SimulationRun->get($id, 'csv');
+    if (Bio::Cellucidate::SimulationRun->get($id)->{state} eq 'succeeded') {
+        print Bio::Cellucidate::SimulationRun->get($id, 'csv');
     }
 
     # The metadata for the plots
-    $plots = Cellucidate::SimulationRun->plots($id);
+    $plots = Bio::Cellucidate::SimulationRun->plots($id);
 
 
 =head1 SEE ALSO
@@ -68,7 +69,7 @@ at your option, any later version of Perl 5 you may have available.
 
 =cut
 
-use base Cellucidate::Base;
+use base Bio::Cellucidate::Base;
 
 sub route { '/simulation_runs'; }
 sub element { 'simulation-run'; }
@@ -78,19 +79,19 @@ sub plots {
     my $self = shift;
     my $id = shift;
     my $format = shift;
-    $self->rest('GET', $self->route . "/$id" . Cellucidate::Plot->route, $format)->processResponseAsArray(Cellucidate::Plot->element);
+    $self->rest('GET', $self->route . "/$id" . Bio::Cellucidate::Plot->route, $format)->processResponseAsArray(Bio::Cellucidate::Plot->element);
 }
 
 sub progress {
     my $self = shift;
     my $id = shift;
-    Cellucidate::SimulationRun->get($id)->{progress};
+    Bio::Cellucidate::SimulationRun->get($id)->{progress};
 }
 
 sub complete {
     my $self = shift;
     my $id = shift;
-    my $state = Cellucidate::SimulationRun->get($id)->{state};
+    my $state = Bio::Cellucidate::SimulationRun->get($id)->{state};
     return ( ($state eq 'failed') || ($state eq 'succeeded') || ($state eq 'aborted') );
 }
 

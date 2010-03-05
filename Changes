@@ -1,5 +1,8 @@
 Revision history for Perl extension Cellucidate.
 
+0.03  Fri Mar  5 01:38:00 2010
+  - Changed the name to Bio-Cellucidate
+
 0.02  Thu Mar  4 23:26:00 2010
   - Updated MANIFEST, missing a fixture file.
 

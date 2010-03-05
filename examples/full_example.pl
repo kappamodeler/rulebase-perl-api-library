@@ -1,25 +1,25 @@
 #!/usr/bin/env perl -w
-use Cellucidate;
+use Bio::Cellucidate;
 use Data::Dumper;
 use strict;
 
 
 # Setup my login information.
-$Cellucidate::CONFIG = { host => 'http://api.cellucidate.com'  };
+$Bio::Cellucidate::CONFIG = { host => 'http://api.cellucidate.com'  };
 
 die "Set your AUTH up here to run this script (remove/comment out this line)";
-$Cellucidate::AUTH = { login => '<username>', api_key => '<api-key>' };
+$Bio::Cellucidate::AUTH = { login => '<login>', api_key => '<key>' };
 
 
 
 # Here are all my Bookshelves
-my $bookshelves = Cellucidate::Bookshelf->find;
+my $bookshelves = Bio::Cellucidate::Bookshelf->find;
 print "\nMy Bookshelves:\n";
 print Dumper $bookshelves;
 
 
 # Import a new book from kappa (bottom of this file)
-my $kappa_import_job = Cellucidate::KappaImportJob->create( { kappa => join("",<DATA>), book_name => 'New Book from Kappa' });
+my $kappa_import_job = Bio::Cellucidate::KappaImportJob->create( { kappa => join("",<DATA>), book_name => 'New Book from Kappa' });
 print "\nImport Job:\n";
 print Dumper $kappa_import_job;
 
@@ -30,7 +30,7 @@ while ($kappa_import_job->{status} ne 'succeeded') {
     sleep(2);
     
     # Requery job
-    $kappa_import_job = Cellucidate::KappaImportJob->get($kappa_import_job->{id});
+    $kappa_import_job = Bio::Cellucidate::KappaImportJob->get($kappa_import_job->{id});
 
     printf "Job status is %s.  %.2f %% complete...\n",
        $kappa_import_job->{status}, 
@@ -39,78 +39,78 @@ while ($kappa_import_job->{status} ne 'succeeded') {
 
 
 # The job is complete, see what the result is...
-my $result = Cellucidate::KappaImportJob->result($kappa_import_job->{id});
+my $result = Bio::Cellucidate::KappaImportJob->result($kappa_import_job->{id});
 print "\nResult of the import job:\n";
 print Dumper $result;
 
 
 # We should have a book, so let's get it by it's id
-my $book = Cellucidate::Book->get($result->{id});
+my $book = Bio::Cellucidate::Book->get($result->{id});
 print "\nNewly created Book\n";
 print Dumper $book;
 
 
 # Let's examine the agents, rules and models in my book
-my $agents = Cellucidate::Book->agents($result->{id});
+my $agents = Bio::Cellucidate::Book->agents($result->{id});
 print "\nImported Agents:\n";
 print Dumper $agents;
 
 
 # Here is a detail of the first agent
-my $agent = Cellucidate::Agent->get($agents->[0]->{id});
+my $agent = Bio::Cellucidate::Agent->get($agents->[0]->{id});
 print "\nFirst Agent Detail:\n";
 print Dumper $agent;
 
 
-my $rules = Cellucidate::Book->rules($result->{id});
+my $rules = Bio::Cellucidate::Book->rules($result->{id});
 print "\nImported Rules:\n";
 print Dumper $rules;
 
 # Here is a detail of the first rule
-my $rule = Cellucidate::Rule->get($rules->[0]->{id});
+my $rule = Bio::Cellucidate::Rule->get($rules->[0]->{id});
 print "\nFirst Rule Detail:\n";
 print Dumper $rule;
 
 
-my $models = Cellucidate::Book->models($result->{id});
+my $models = Bio::Cellucidate::Book->models($result->{id});
 print "\nImported Models:\n";
 print Dumper $models;
 
 # Here is a detail of the first model
-my $model = Cellucidate::Model->get($models->[0]->{id});
+my $model = Bio::Cellucidate::Model->get($models->[0]->{id});
 print "\nFirst Model Detail:\n";
 print Dumper $model;
 
 
 # Lets look at the initial conditions of our model. 
-my $ics = Cellucidate::Model->initial_conditions($model->{id});
+my $ics = Bio::Cellucidate::Model->initial_conditions($model->{id});
 print "\nInitial Conditions:\n";
 print Dumper $ics;
 
 # Here are the details of the first initial condition
-my $ic = Cellucidate::InitialCondition->get($ics->[0]->{id});
+my $ic = Bio::Cellucidate::InitialCondition->get($ics->[0]->{id});
 print "\nFirst Initial Condition Detail:\n";
 print Dumper $ic;
 
 
 # Here are the model rules.
-my $model_rules = Cellucidate::Model->model_rules($model->{id});
+my $model_rules = Bio::Cellucidate::Model->model_rules($model->{id});
 print "\nModel Rules for model:\n";
 print Dumper $model_rules;
 
 # Here is the detail of the first model rule
-my $model_rule = Cellucidate::ModelRule->get($model_rules->[0]->{id});
+my $model_rule = Bio::Cellucidate::ModelRule->get($model_rules->[0]->{id});
 print "\nModel Rule Detail:\n";
 print Dumper $model_rule;
 
 
 # There shouldn't be any simulation runs yet, but let's check
-my $simulation_runs = Cellucidate::Model->simulation_runs($model->{id});
+my $simulation_runs = Bio::Cellucidate::Model->simulation_runs($model->{id});
 print "\nSimulation Runs for model:\n";
 print Dumper $simulation_runs;
 
 # Let's create a simulation run (2 iterations)!
-my $simulation_run = Cellucidate::SimulationRun->create({ model_id => $model->{id}, num_iterations => 2 }); #, simulation_method => 'ODE' });
+my $simulation_run = Bio::Cellucidate::SimulationRun->create({ model_id => $model->{id}, num_iterations => 2 }); #, simulation_method => 'ODE' });
 print "\nNewly created Simulation Run:\n";
 print Dumper $simulation_run;
 
@@ -120,7 +120,7 @@ while ($simulation_run->{state} ne 'succeeded') {
     sleep(2);
     
     # Requery simulation
-    $simulation_run = Cellucidate::SimulationRun->get($simulation_run->{id});
+    $simulation_run = Bio::Cellucidate::SimulationRun->get($simulation_run->{id});
 
     printf "Simulation run state is %s.  %.2f %% complete...\n",
        $simulation_run->{state}, 
@@ -134,24 +134,24 @@ print Dumper $simulation_run;
 
 
 # Let's see all the data in CSV format for the simulation
-my $simulation_csv =  Cellucidate::SimulationRun->get($simulation_run->{id}, 'CSV');
+my $simulation_csv =  Bio::Cellucidate::SimulationRun->get($simulation_run->{id}, 'CSV');
 print "\nSimluation Run CSV:\n";
 print Dumper $simulation_csv;
 
 
 # We can get the Plots
-my $plots = Cellucidate::SimulationRun->plots($simulation_run->{id});
+my $plots = Bio::Cellucidate::SimulationRun->plots($simulation_run->{id});
 print "\nAll Plots from Simulation:\n";
 print Dumper $plots;
 
 
 # Detail for first plot
-my $plot = Cellucidate::Plot->get($plots->[0]->{id});
+my $plot = Bio::Cellucidate::Plot->get($plots->[0]->{id});
 print "\nFirst Plot Detail:\n";
 print Dumper $plot;
 
 # Get the plot in CSV
-my $plot_csv = Cellucidate::Plot->get($plot->{id}, 'CSV');
+my $plot_csv = Bio::Cellucidate::Plot->get($plot->{id}, 'CSV');
 print "\nFirst Plot in CSV:\n";
 print Dumper $plot_csv;
 
