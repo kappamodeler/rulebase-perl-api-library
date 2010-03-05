@@ -13,6 +13,8 @@ To install this module type the following:
    make test
    make install
 
+Also, it's on CPAN as Bio-Cellucidate (http://search.cpan.org/~bkaney/Bio-Cellucidate/).
+
 SYNOPSIS
 --------
 
