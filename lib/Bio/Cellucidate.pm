@@ -19,7 +19,7 @@ use Bio::Cellucidate::KappaImportJob;
 use strict;
 use warnings;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 our $CONFIG = {
     host => 'http://api.cellucidate.com'
