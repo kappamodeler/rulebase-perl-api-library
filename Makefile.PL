@@ -5,8 +5,19 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     NAME              => 'Cellucidate',
     VERSION_FROM      => 'lib/Cellucidate.pm', # finds $VERSION
-    PREREQ_PM         => {}, # e.g., Module::Name => 1.1
+    PREREQ_PM         => { 
+        XML::Simple     => 2.18,
+        HTTP::Headers   => 5.827,
+        REST::Client    => 134
+    },
+    META_MERGE        => {
+        resources   => {
+            license     => 'http://dev.perl.org/licenses/',
+            homepage    => 'http://cellucidate.com/api',
+            repository  => 'http://github.com/cellucidate/perl-Cellucidate'
+        }
+    },
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/Cellucidate.pm', # retrieve abstract from module
-       AUTHOR         => 'Brian Kaney <bkaney@hsd1.ma.comcast.net.>') : ()),
+       AUTHOR         => 'Brian Kaney <brian@vermonster.com>') : ()),
 );
