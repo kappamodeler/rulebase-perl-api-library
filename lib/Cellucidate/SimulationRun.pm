@@ -49,9 +49,10 @@ Cellucidate::SimulationRun
     # The metadata for the plots
     $plots = Cellucidate::SimulationRun->plots($id);
 
+
 =head1 SEE ALSO
 
-L<Cellucidate>, L<Cellucidate::Model>
+L<http://cellucidate.com>
 
 =head1 AUTHOR
 
@@ -59,7 +60,7 @@ Brian Kaney, E<lt>brian@vermonster.com<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2010 by Brian Kaney
+Copyright (C) 2010 by Plectix BioSystems Inc 
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.9 or,

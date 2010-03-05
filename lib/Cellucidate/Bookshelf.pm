@@ -20,9 +20,11 @@ Cellucidate::Bookshelf
     # All books on a bookshelf (given an id);
     $books = Cellucidate::Bookshelf->books( $bookshelf_id );
 
+
+
 =head1 SEE ALSO
 
-L<Cellucidate>, L<Cellucidate::Book>
+L<http://cellucidate.com>
 
 =head1 AUTHOR
 
