@@ -1,7 +1,7 @@
 Cellucidate
 ===========
 
-This is a perl library to interact with Cellucidate <http://cellucidate.com>
+This is a perl library to interact with RuleBase <http://rulebase.org>
 
 INSTALLATION
 ------------
@@ -69,7 +69,7 @@ SYNOPSIS
 DESCRIPTION
 -----------
 
-Cellucidate is a tool for computation biologists to run simulations.  It is
+RuleBase is a tool for computation biologists to run simulations.  It is
 based on the Kappa language.
 
 The various objects in Cellucidate are arranged into a book metaphor.  The basic
@@ -95,7 +95,7 @@ data and running various jobs L<Cellucidate::KappaImportJob>.
 REST
 ----
 
-Cellucidate has a RESTful interface.  So this library is built upon the 
+RuleBase has a RESTful interface.  So this library is built upon the 
 REST::Client library.  At the core, there are 4 operations over HTTP,
 including: GET, POST, PUT and DELETE.  The encoding is primarily XML, but
 certain resource can be returned in CSV and Kappa (application/x-kappa).
