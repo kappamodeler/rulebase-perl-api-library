@@ -135,104 +135,88 @@ It includes your email address as your login and API Key.
 Subclasses
 --------------------------------------------------
 
-Cellucidate::Base
+    Cellucidate::Base
 
 Base class for each resource.
 
-
-Cellucidate::Bookshelf
+    Cellucidate::Bookshelf
 
 Represents a Bookshelf in RuleBase.  This is top-level object in RuleBase.
 
-
-
-Cellucidate::Book
+    Cellucidate::Book
 
 Represents a Book that may contain models and journal pages.  A book
 can be placed on a Bookshelf and has many Models.
 
-
-Cellucidate::Agent
+    Cellucidate::Agent
 
 Represents an agent in RuleBase.  Agents are used by rules and initial
 conditions and solution observables.  Books have zero, one or many agents
 and an agent belongs to a book.
 
-
-Cellucidate::Rule
+    Cellucidate::Rule
 
 Represents a rule in RuleBase. Books have zero, one or many rules
 and a rule belongs to a book.  Models have Rules through the ModelRule
 resource.
 
-
-Cellucidate::Model
+    Cellucidate::Model
 
 Represents a biological model in RuleBase.  The model belongs to a book
 and contains a number of Model Rules and Initial Conditions.  A number of
 simulations can be run from a Model, each having a number of settings.
 
-
-Cellucidate::ModelRule
+    Cellucidate::ModelRule
 
 Represents a Rule that is used my a model.  Model rules belong to a model and
 models have one or more typically many model rules.  ModelRules have an
 association to Rules.
 
-
-Cellucidate::SolutionObservable
+    Cellucidate::SolutionObservable
 
 Represents an Agent or set of Agents that you want to observe and plot the 
 concentration of when the simulation is run.
 
-
-Cellucidate::RuleObservable
+    Cellucidate::RuleObservable
 
 Represents a ModelRule that you want to observe the activity of when the
 simulation is run.
 
-
-Cellucidate::InitialCondition
+    Cellucidate::InitialCondition
 
 This is an initial condition in a model.  Models have one by more typically
 many initial conditions and an initial condition belongs to a model.
 
-
-Cellucidate::SimulationRun
+    Cellucidate::SimulationRun
 
 A simulation run represents an execution of the RuleBase simulator and contains
 child result resources.  Simulation runs define various settings.
 A Model has one or many simulation runs and a simulation run belongs to
 a model.
 
-
-Cellucidate::OdeResult
+    Cellucidate::OdeResult
 
 Represents the set of ODE formulas generated when running a simulation in ODE-mode.
 The results can be used directly in MATLAB.
 
-
-Cellucidate::Plot
+    Cellucidate::Plot
 
 A plot contains a single time series and a number of data series representing the
 rule and solution observables.  A simulation run has one or many plots (one for
 each iteration).
 
-
-Cellucidate::Series
+    Cellucidate::Series
 
 A collection of datapoints.  A series belongs to a plot and represents an observable
 or time.
 
-
-Cellucidate::KappaImportJob
+    Cellucidate::KappaImportJob
 
 This is a resource that represents an import job.  This allows the creation
 of a Book, including Model Rules and Initial Conditions, from a Kappa 
 string.
 
-
-Cellucidate::Request
+    Cellucidate::Request
 
 This is the request client, a subclass of L<REST::Client>.  This isn't a 
 RuleBase resource.
