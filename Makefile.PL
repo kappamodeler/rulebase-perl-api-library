@@ -13,8 +13,8 @@ WriteMakefile(
     META_MERGE        => {
         resources   => {
             license     => 'http://dev.perl.org/licenses/',
-            homepage    => 'http://cellucidate.com/api',
-            repository  => 'http://github.com/cellucidate/perl-Cellucidate'
+            homepage    => 'http://rulebase.org/api',
+            repository  => 'http://http://github.com/kappamodeler/rulebase-perl-api-library'
         }
     },
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
