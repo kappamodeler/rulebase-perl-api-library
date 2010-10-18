@@ -5,7 +5,7 @@ use strict;
 
 
 # Setup my login information.
-$Bio::Cellucidate::CONFIG = { host => 'http://api.cellucidate.com'  };
+$Bio::Cellucidate::CONFIG = { host => 'http://api.rulebase.org'  };
 
 die "Set your AUTH up here to run this script (remove/comment out this line)";
 $Bio::Cellucidate::AUTH = { login => '<login>', api_key => '<key>' };
